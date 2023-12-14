@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '@features/authentification/domain/entities/user';
+import { LoginApiResponse } from '@features/authentification/adapters/secondary/api/login-response.interface';
 import { AuthenticationApiPort } from '@features/authentification/domain/ports/api/authentication-api.port';
 import { environment } from '@src/environments/environment';
 import { Observable } from 'rxjs';
@@ -9,12 +9,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthenticationApiService implements AuthenticationApiPort {
-  private authApiUrl = `${environment.apiUrl}/authentication`;
+  private authApiUrl = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient) {}
 
-  login(log: string, password: string): Observable<User> {
-    return this.http.post<User>(`${this.authApiUrl}/login`, {
+  login(log: string, password: string): Observable<LoginApiResponse> {
+    return this.http.post<LoginApiResponse>(`${this.authApiUrl}/auth/login`, {
       log,
       password,
     });

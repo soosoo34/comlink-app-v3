@@ -16,10 +16,8 @@ import { AppComponent } from './app.component';
     NgxsModule.forRoot([], {
       developmentMode: !environment.production,
     }),
+    NgxsReduxDevtoolsPluginModule.forRoot({}),
     NgxsLoggerPluginModule.forRoot({
-      disabled: environment.production,
-    }),
-    NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: environment.production,
     }),
   ],

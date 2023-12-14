@@ -7,6 +7,7 @@ export interface User {
   password: string;
   challenge: number;
   role: string;
+  log?: string;
   intitule: string;
   couleur: string;
   civilite: string;
