@@ -21,11 +21,14 @@ export class InMemoryAuthenticationApi implements AuthenticationApiPort {
     this.shouldFail = true;
   }
 
+  shouldSucceedNextLogin(): void {
+    this.shouldFail = false;
+  }
+
   login(): Observable<LoginApiResponse> {
     return new Observable(subscriber => {
       if (this.shouldFail) {
         subscriber.error(new Error('Invalid credentials'));
-        this.shouldFail = false;
         return;
       }
       subscriber.next(this.responseApi);

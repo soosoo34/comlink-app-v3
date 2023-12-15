@@ -32,11 +32,12 @@ describe('Login Action', () => {
     store = TestBed.inject(Store);
   });
 
-  it('should authenticate the user and update the status', () => {
+  it("devrait authentifier l'utilisateur et mettre à jour l'état", () => {
     const log = 'test@example.com';
     const password = 'password';
     const user: User = userBuilder.build();
     authenticationApi = TestBed.inject(InMemoryAuthenticationApi);
+    authenticationApi.shouldSucceedNextLogin();
     store.dispatch(new Login(log, password));
     expect(store.selectSnapshot(state => state.authentication)).toEqual({
       user,
@@ -47,7 +48,7 @@ describe('Login Action', () => {
     expect(localStorage.getItem('user_token')).toEqual('token');
   });
 
-  it('should handle the authentication error and update the status', () => {
+  it("devrait gérer l'erreur lors de l'authentification et mettre à jour l'état", () => {
     const log = '';
     const password = '';
     const errorMessage = 'Invalid credentials';
