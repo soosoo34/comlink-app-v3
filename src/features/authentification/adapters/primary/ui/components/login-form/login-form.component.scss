@@ -1,0 +1,89 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+.container-login {
+  display: grid;
+  width: 40vw;
+  height: 40vh;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "background-img header header"
+    "background-img form form"
+    "background-img footer footer";
+}
+
+.background-img {
+  grid-area: background-img;
+  background-image: url('/assets/login/login.jpg');
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 200px;
+    height: 200px;
+    background: #000407;
+    border-radius: 20px;
+
+  }
+}
+
+.header {
+  grid-area: header;
+}
+
+.form {
+  grid-area: form;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+
+.header {
+  grid-area: header;
+ 
+}
+
+.form {
+  grid-area: form;
+  background: gray;
+}
+
+.footer {
+  grid-area: footer;
+  background: #00528C;
+}
+
+@media (max-width: 600px) { //for mobile
+  .container-login {
+    width: 90vw;
+    height: 50vh;
+  }
+}
+
+@media (max-width: 768px) { //for tablets
+  .container-login {
+    width: 80vw;
+    height: 50vh;
+  }
+}
+
+@media (max-width: 800px) { //for tablets
+  .container-login {
+    width: 60vw;
+    height: 50vh;
+  }
+}

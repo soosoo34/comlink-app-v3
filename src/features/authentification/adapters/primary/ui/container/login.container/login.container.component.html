@@ -1,10 +1,3 @@
-<h1>Bienvenue sur Comlink</h1>
-<ng-container [formGroup]="loginForm">
-  <label for="log">Login</label>
-  <input formControlName="log" id="log" type="text" />
-
-  <label for="password">Password</label>
-  <input formControlName="password" id="password" type="password" />
-
-  <button (click)="login()">Login</button>
-</ng-container>
+<div class="container">
+  <app-login-form [loginForm]="loginForm" [login]="login"></app-login-form>
+</div>

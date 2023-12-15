@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginFormComponent } from '@features/authentification/adapters/primary/ui/components/login-form/login-form.component';
 import { LoginContainerComponent } from '@features/authentification/adapters/primary/ui/container/login.container/login.container.component';
 import { AuthenticationState } from '@features/authentification/domain/redux/state/authentication.state';
 import { NgxsModule } from '@ngxs/store';
@@ -21,6 +22,6 @@ import { AuthenticationApiPort } from 'src/features/authentification/domain/port
     { provide: AuthenticationApiPort, useClass: AuthenticationApiService },
   ],
   exports: [],
-  declarations: [LoginContainerComponent],
+  declarations: [LoginContainerComponent, LoginFormComponent],
 })
 export class AuthenticationModule {}

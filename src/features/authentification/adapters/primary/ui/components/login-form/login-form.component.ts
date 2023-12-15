@@ -1,0 +1,12 @@
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrl: './login-form.component.scss',
+})
+export class LoginFormComponent {
+  @Input({ required: true }) loginForm!: FormGroup;
+  @Input({ required: true }) login!: () => void;
+}
