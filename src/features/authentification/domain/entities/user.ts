@@ -1,4 +1,4 @@
-import { DateTimeInterface } from '@src/shared/date-time.interface.ts/date-time.interface';
+import { DateTimeInterface } from '@src/shared/interaces/date-time.interface.ts/date-time.interface';
 
 export interface User {
   id: number;

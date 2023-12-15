@@ -38,18 +38,10 @@ export class AuthenticationState {
       loading: true,
       errorMessage: null,
     });
-
     return this.authenticationApi.login(action.log, action.password).pipe(
-      tap((response: LoginApiResponse) => {
-        const user = response.user;
-        console.log('user', user);
-        ctx.setState({
-          user,
-          isLogged: true,
-          loading: false,
-          errorMessage: null,
-        });
-      }),
+      tap((response: LoginApiResponse) =>
+        this.handleSuccessfulLogin(response, ctx)
+      ),
       catchError(error => {
         ctx.patchState({
           errorMessage: error.message,
@@ -58,5 +50,28 @@ export class AuthenticationState {
         return throwError(error);
       })
     );
+  }
+
+  private handleSuccessfulLogin(
+    response: LoginApiResponse,
+    ctx: StateContext<AuthenticationStateModel>
+  ): void {
+    const user = response.user;
+
+    // Save token to localStorage
+    localStorage.setItem('user_token', response.access_token);
+
+    // Check token is saved in localStorage
+    const tokenInLocalStorage = localStorage.getItem('acces_token');
+
+    // Update state based on whether token is present in localStorage
+    const isLoggedIn = tokenInLocalStorage != null;
+
+    ctx.setState({
+      user,
+      isLogged: isLoggedIn,
+      loading: false,
+      errorMessage: null,
+    });
   }
 }

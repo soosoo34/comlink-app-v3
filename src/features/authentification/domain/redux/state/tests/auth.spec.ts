@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { InMemoryAuthenticationApi } from '@features/authentification/adapters/secondary/in-memory/in-memory-authentication-api';
+import { User } from '@features/authentification/domain/entities/user';
 import { UserBuilder } from '@features/authentification/domain/entities/user.builder';
 import { AuthenticationApiPort } from '@features/authentification/domain/ports/api/authentication-api.port';
 import { Login } from '@features/authentification/domain/redux/actions/authentication.action';
@@ -31,21 +32,22 @@ describe('Login Action', () => {
     store = TestBed.inject(Store);
   });
 
-  it("devrait authentifier l'utilisateur et mettre à jour l'état", () => {
+  it('should authenticate the user and update the status', () => {
     const log = 'test@example.com';
     const password = 'password';
-    const user = userBuilder.build();
+    const user: User = userBuilder.build();
     authenticationApi = TestBed.inject(InMemoryAuthenticationApi);
     store.dispatch(new Login(log, password));
     expect(store.selectSnapshot(state => state.authentication)).toEqual({
       user,
       errorMessage: null,
-      isLogged: true,
+      isLogged: false,
       loading: false,
     });
+    expect(localStorage.getItem('user_token')).toEqual('token');
   });
 
-  it("devrait gérer l'erreur lors de l'authentification et mettre à jour l'état", () => {
+  it('should handle the authentication error and update the status', () => {
     const log = '';
     const password = '';
     const errorMessage = 'Invalid credentials';

@@ -8,3 +8,9 @@ export class Login {
     public readonly password: string
   ) {}
 }
+
+export class setToken {
+  static readonly type = '[Authentication] setToken';
+
+  constructor(public readonly token: string) {}
+}
