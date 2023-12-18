@@ -16,6 +16,8 @@ export class LoginContainerComponent {
       log: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
+    console.log('LoginContainerComponent');
+    console.log(this.store);
   }
 
   login() {
@@ -25,6 +27,7 @@ export class LoginContainerComponent {
     const passwordControl = this.loginForm.get('password');
 
     if (this.loginForm.valid && logControl && passwordControl) {
+      console.log(new Login(logControl.value, passwordControl.value));
       this.store.dispatch(new Login(logControl.value, passwordControl.value));
     }
   }

@@ -11,7 +11,7 @@ export class AuthenticationSelectors {
   }
 
   @Selector([AuthenticationState])
-  isLogged(state: AuthenticationStateModel): boolean {
+  static isLogged(state: AuthenticationStateModel): boolean {
     return state.isLogged;
   }
 }

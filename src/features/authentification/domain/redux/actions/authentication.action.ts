@@ -14,3 +14,7 @@ export class setToken {
 
   constructor(public readonly token: string) {}
 }
+
+export class CheckUserInLocalStorage {
+  static readonly type = '[AUTH] Check User in Local Storage';
+}

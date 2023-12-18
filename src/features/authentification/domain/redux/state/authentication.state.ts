@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { LoginApiResponse } from '@features/authentification/adapters/secondary/api/login-response.interface';
 import { User } from '@features/authentification/domain/entities/user';
 import { AuthenticationApiPort } from '@features/authentification/domain/ports/api/authentication-api.port';
-import { Login } from '@features/authentification/domain/redux/actions/authentication.action';
+import {
+  CheckUserInLocalStorage,
+  Login,
+} from '@features/authentification/domain/redux/actions/authentication.action';
 import { Action, State, StateContext } from '@ngxs/store';
 import { Observable, tap, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -28,6 +31,26 @@ export const authenticationStateDefault: AuthenticationStateModel = {
 @Injectable()
 export class AuthenticationState {
   constructor(private authenticationApi: AuthenticationApiPort) {}
+
+  @Action(CheckUserInLocalStorage)
+  checkUserInLocalStorage(ctx: StateContext<AuthenticationStateModel>): void {
+    const tokenInLocalStorage = localStorage.getItem('user_token');
+    const userDataInLocalStorageStr = localStorage.getItem('user_data');
+    const userDataInLocalStorage = JSON.parse(
+      userDataInLocalStorageStr as string
+    );
+    const isLoggedIn =
+      tokenInLocalStorage != null && userDataInLocalStorage != null;
+
+    if (isLoggedIn) {
+      ctx.setState({
+        user: userDataInLocalStorage,
+        isLogged: isLoggedIn,
+        loading: false,
+        errorMessage: null,
+      });
+    }
+  }
 
   @Action(Login)
   login(
@@ -60,12 +83,14 @@ export class AuthenticationState {
 
     // Save token to localStorage
     localStorage.setItem('user_token', response.access_token);
+    localStorage.setItem('user_data', JSON.stringify(user));
 
     // Check token is saved in localStorage
     const tokenInLocalStorage = localStorage.getItem('acces_token');
-
-    // Update state based on whether token is present in localStorage
-    const isLoggedIn = tokenInLocalStorage != null;
+    const userDataInLocalStorage = localStorage.getItem('user_data');
+    // Update state based on whether token and user data are present in localStorage
+    const isLoggedIn =
+      tokenInLocalStorage != null && userDataInLocalStorage != null;
 
     ctx.setState({
       user,

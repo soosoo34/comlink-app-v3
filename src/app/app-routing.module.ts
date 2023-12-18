@@ -9,6 +9,18 @@ const routes: Routes = [
         m => m.AuthenticationModule
       ),
   },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('src/features/dashboard/dashboard.module').then(
+        m => m.DashboardModule
+      ),
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

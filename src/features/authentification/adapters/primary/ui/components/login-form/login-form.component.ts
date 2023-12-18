@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -8,5 +8,9 @@ import { FormGroup } from '@angular/forms';
 })
 export class LoginFormComponent {
   @Input({ required: true }) loginForm!: FormGroup;
-  @Input({ required: true }) login!: () => void;
+  @Output() tryLogin = new EventEmitter<void>();
+
+  onTryLogin() {
+    this.tryLogin.emit();
+  }
 }

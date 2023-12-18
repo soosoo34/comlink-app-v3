@@ -1,3 +1,3 @@
 <div class="container">
-  <app-login-form [loginForm]="loginForm" [login]="login"></app-login-form>
+  <app-login-form (tryLogin)="login()" [loginForm]="loginForm"></app-login-form>
 </div>
