@@ -1,0 +1,14 @@
+<div class="input-container">
+  <input
+    (blur)="clickOutside.emit()"
+    (click)="onTouched()"
+    (input)="updateValue($event)"
+    (keydown.enter)="update.emit()"
+    [(ngModel)]="innerValue"
+    [attr.id]="inputId ? inputId : null"
+    [ngClass]="classes"
+    [placeholder]="placeholder"
+    [readonly]="readOnly"
+    [type]="type"
+    autocomplete="on" />
+</div>

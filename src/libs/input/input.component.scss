@@ -1,0 +1,147 @@
+@import "src/libs/scss";
+
+.input-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  input {
+    text-indent: 1.4rem;
+    font-size: 18px;
+    height: 45px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &[type="checkbox"] {
+      height: auto;
+    }
+  }
+
+}
+
+.small {
+  width: 100px;
+}
+
+.medium {
+  width: 239px;
+}
+
+.large {
+  width: 300px;
+}
+
+.custom {
+  width: 100%;
+}
+
+.extra-large {
+  width: 327px;
+  height: 45px;
+
+  @media (max-width: 356px) {
+    width: 280px;
+  }
+  @media (max-width: 292px) {
+    width: 240px;
+  }
+}
+
+.rounded {
+  border-radius: 20px;
+}
+
+.secondary {
+  border: 1px solid $secondary;
+  border-radius: 20px;
+
+  &:focus {
+    outline: none !important;
+    border: 1px solid $secondary;
+    box-shadow: 0 0 10px $secondary
+  }
+}
+
+.primary {
+  border: 1px solid var(--primary-color);
+  border-radius: 20px;
+
+  &:focus {
+    outline: none !important;
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
+  }
+}
+
+.none {
+  border: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.background-transparent {
+  background: transparent;
+}
+
+.shadow {
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.invalid {
+  border-color: red;
+
+  &:focus {
+    border-color: red;
+    box-shadow: 0 0 10px red;
+  }
+}
+
+.white-border {
+  border: 1px solid white;
+}
+
+.black-border {
+  border: 1px solid black;
+}
+
+.text-primary {
+  color: $primary;
+}
+
+.text-white {
+  color: white;
+}
+
+.text-black {
+  color: black
+}
+
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: left;
+}
+
+.text-right {
+  text-align: left;
+}
+
+.text-custom {
+  text-align: left;
+}
+
+.text-search {
+  text-align: left;
+}
+
