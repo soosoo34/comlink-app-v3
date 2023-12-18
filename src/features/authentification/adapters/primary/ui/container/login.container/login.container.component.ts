@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Login } from '@features/authentification/domain/redux/actions/authentication.action';
+import {
+  CheckUserInLocalStorage,
+  Login,
+} from '@features/authentification/domain/redux/actions/authentication.action';
 import { Store } from '@ngxs/store';
 
 @Component({
@@ -16,8 +19,7 @@ export class LoginContainerComponent {
       log: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
-    console.log('LoginContainerComponent');
-    console.log(this.store);
+    this.store.dispatch(new CheckUserInLocalStorage());
   }
 
   login() {

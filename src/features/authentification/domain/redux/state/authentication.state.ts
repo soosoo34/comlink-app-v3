@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginApiResponse } from '@features/authentification/adapters/secondary/api/login-response.interface';
 import { User } from '@features/authentification/domain/entities/user';
 import { AuthenticationApiPort } from '@features/authentification/domain/ports/api/authentication-api.port';
@@ -30,7 +31,10 @@ export const authenticationStateDefault: AuthenticationStateModel = {
 })
 @Injectable()
 export class AuthenticationState {
-  constructor(private authenticationApi: AuthenticationApiPort) {}
+  constructor(
+    private authenticationApi: AuthenticationApiPort,
+    private router: Router
+  ) {}
 
   @Action(CheckUserInLocalStorage)
   checkUserInLocalStorage(ctx: StateContext<AuthenticationStateModel>): void {
@@ -49,6 +53,8 @@ export class AuthenticationState {
         loading: false,
         errorMessage: null,
       });
+      // redirect to dashboard
+      this.router.navigate(['/dashboard']);
     }
   }
 
