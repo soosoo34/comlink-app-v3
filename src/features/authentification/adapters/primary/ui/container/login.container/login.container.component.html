@@ -1,3 +1,6 @@
 <div class="container">
-  <app-login-form (tryLogin)="login()" [loginForm]="loginForm"></app-login-form>
+  <app-login-form
+    (tryLogin)="login()"
+    [loading]="loading"
+    [loginForm]="loginForm"></app-login-form>
 </div>

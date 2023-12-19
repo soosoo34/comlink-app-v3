@@ -4,7 +4,9 @@ import {
   CheckUserInLocalStorage,
   Login,
 } from '@features/authentification/domain/redux/actions/authentication.action';
-import { Store } from '@ngxs/store';
+import { AuthenticationSelectors } from '@features/authentification/domain/redux/selectors/authentication.selectors';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login.container',
@@ -13,6 +15,8 @@ import { Store } from '@ngxs/store';
 })
 export class LoginContainerComponent {
   loginForm: FormGroup;
+  loading = false;
+  @Select(AuthenticationSelectors.loading) isLoading$!: Observable<boolean>;
 
   constructor(private store: Store) {
     this.loginForm = new FormGroup({
@@ -20,6 +24,10 @@ export class LoginContainerComponent {
       password: new FormControl('', Validators.required),
     });
     this.store.dispatch(new CheckUserInLocalStorage());
+    this.isLoading$.subscribe(data => {
+      console.log(data);
+      this.loading = data;
+    });
   }
 
   login() {

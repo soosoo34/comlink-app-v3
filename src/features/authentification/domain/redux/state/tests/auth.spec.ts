@@ -54,7 +54,7 @@ describe('Login Action', () => {
     expect(store.selectSnapshot(state => state.authentication)).toEqual({
       user,
       errorMessage: null,
-      isLogged: false,
+      isLogged: true,
       loading: false,
     });
     expect(localStorage.getItem('user_token')).toEqual('token');

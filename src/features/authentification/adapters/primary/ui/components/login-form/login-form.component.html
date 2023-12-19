@@ -40,6 +40,8 @@
       <hr />
       <app-btn
         (click)="onTryLogin()"
+        [disabled]="loading"
+        [isLoading]="loading"
         color="primary"
         size="large"
         text="Connexion">

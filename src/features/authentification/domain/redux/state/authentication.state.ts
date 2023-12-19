@@ -92,18 +92,20 @@ export class AuthenticationState {
     localStorage.setItem('user_data', JSON.stringify(user));
 
     // Check token is saved in localStorage
-    const tokenInLocalStorage = localStorage.getItem('acces_token');
+    const tokenInLocalStorage = localStorage.getItem('user_token');
     const userDataInLocalStorage = localStorage.getItem('user_data');
     // Update state based on whether token and user data are present in localStorage
     const isLoggedIn =
       tokenInLocalStorage != null && userDataInLocalStorage != null;
-
     ctx.setState({
       user,
       isLogged: isLoggedIn,
       loading: false,
       errorMessage: null,
     });
-    this.router.navigate(['/dashboard']);
+
+    if (isLoggedIn) {
+      this.router.navigateByUrl('/dashboard');
+    }
   }
 }

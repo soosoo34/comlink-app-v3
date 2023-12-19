@@ -8,6 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class LoginFormComponent {
   @Input({ required: true }) loginForm!: FormGroup;
+  @Input() loading = false;
   @Output() tryLogin = new EventEmitter<void>();
 
   onTryLogin() {
