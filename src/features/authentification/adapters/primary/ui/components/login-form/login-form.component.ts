@@ -10,6 +10,7 @@ export class LoginFormComponent {
   @Input({ required: true }) loginForm!: FormGroup;
   @Input() loading = false;
   @Output() tryLogin = new EventEmitter<void>();
+  @Input() errorMessage = false;
 
   onTryLogin() {
     this.tryLogin.emit();

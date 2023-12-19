@@ -1,6 +1,7 @@
 <div class="container">
   <app-login-form
     (tryLogin)="login()"
+    [errorMessage]="errorMessage"
     [loading]="loading"
     [loginForm]="loginForm"></app-login-form>
 </div>

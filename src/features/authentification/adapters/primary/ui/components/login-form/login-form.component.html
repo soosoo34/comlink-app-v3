@@ -46,6 +46,9 @@
         size="large"
         text="Connexion">
       </app-btn>
+      <small *ngIf="errorMessage" class="error-message">
+        Vérifiez vos identifiants
+      </small>
     </div>
   </div>
 </div>

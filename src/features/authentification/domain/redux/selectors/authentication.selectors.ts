@@ -19,4 +19,9 @@ export class AuthenticationSelectors {
   static loading(state: AuthenticationStateModel): boolean {
     return state.loading;
   }
+
+  @Selector([AuthenticationState])
+  static errorMessages(state: AuthenticationStateModel): string | null {
+    return state.errorMessage;
+  }
 }

@@ -5,9 +5,11 @@ import {
   Login,
 } from '@features/authentification/domain/redux/actions/authentication.action';
 import { AuthenticationSelectors } from '@features/authentification/domain/redux/selectors/authentication.selectors';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
+@UntilDestroy()
 @Component({
   selector: 'app-login.container',
   templateUrl: './login.container.component.html',
@@ -15,8 +17,13 @@ import { Observable } from 'rxjs';
 })
 export class LoginContainerComponent {
   loginForm: FormGroup;
-  loading = false;
+
   @Select(AuthenticationSelectors.loading) isLoading$!: Observable<boolean>;
+  loading = false;
+
+  @Select(AuthenticationSelectors.errorMessages)
+  errorMessage$!: Observable<boolean>;
+  errorMessage: boolean = false;
 
   constructor(private store: Store) {
     this.loginForm = new FormGroup({
@@ -24,9 +31,13 @@ export class LoginContainerComponent {
       password: new FormControl('', Validators.required),
     });
     this.store.dispatch(new CheckUserInLocalStorage());
-    this.isLoading$.subscribe(data => {
-      console.log(data);
+    this.isLoading$.pipe(untilDestroyed(this)).subscribe(data => {
       this.loading = data;
+    });
+    this.errorMessage$.pipe(untilDestroyed(this)).subscribe(data => {
+      if (data) {
+        this.errorMessage = true;
+      }
     });
   }
 
@@ -37,7 +48,6 @@ export class LoginContainerComponent {
     const passwordControl = this.loginForm.get('password');
 
     if (this.loginForm.valid && logControl && passwordControl) {
-      console.log(new Login(logControl.value, passwordControl.value));
       this.store.dispatch(new Login(logControl.value, passwordControl.value));
     }
   }
