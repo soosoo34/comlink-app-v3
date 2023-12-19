@@ -104,5 +104,6 @@ export class AuthenticationState {
       loading: false,
       errorMessage: null,
     });
+    this.router.navigate(['/dashboard']);
   }
 }

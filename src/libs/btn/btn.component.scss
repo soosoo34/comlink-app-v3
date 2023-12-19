@@ -1,0 +1,106 @@
+
+.loading-button {
+  height: 40px;
+  border-radius: 20px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+
+  &:disabled {
+    background-color: #dcdcdc;
+    color: #808080;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: #dcdcdc;
+      color: #808080;
+    }
+  }
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// WIDTH
+
+.small {
+  width: 100px;
+}
+
+.medium {
+  width: 150px;
+}
+
+.large {
+  width: 220px;
+}
+
+.primary {
+  background-color: var(--primary-hover);
+  color: white;
+
+  &:hover {
+    background-color: var(--primary-active);
+  }
+}
+
+//TODO CONTINUER ICI
+.secondary {
+  background-color: var(--secondary-active);
+  color: white;
+
+  &:hover {
+    background-color: var(--secondary-hover);
+  }
+}
+
+.ternary {
+  background-color: var(--ternary-active);
+  color: white;
+
+  &:hover {
+    background-color: var(--ternary-hover);
+  }
+}
+
+.alerte {
+  background-color: var(--danger-active);
+  color: white;
+
+  &:hover {
+    background-color: var(--danger-hover);
+  }
+}
+
+.validate {
+  background-color: var(--success-active);
+  color: white;
+
+  &:hover {
+    background-color: var(--success-hover);
+  }
+}
+
+.white {
+  color: white;
+}

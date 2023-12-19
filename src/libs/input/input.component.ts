@@ -53,13 +53,17 @@ export class EbbInputComponent implements ControlValueAccessor {
     | 'text-right'
     | 'text-custom'
     | 'text-search' = 'text-left';
+  @Input() inputId?: string;
   @Output() update = new EventEmitter<void>();
   @Output() clickOutside = new EventEmitter<void>();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private onChange: any;
 
   public get classes(): string[] {
-    const classes = [this.width, this.textColor, this.textAlign];
+    const classes: string[] = [this.width, this.textColor, this.textAlign];
+    if (this.rounded === 'true') {
+      classes.push('rounded');
+    }
     return classes;
   }
 

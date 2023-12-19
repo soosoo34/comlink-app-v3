@@ -1,0 +1,14 @@
+<button
+  [class]="buttonClasses"
+  [disabled]="disabled || isLoading"
+  class="loading-button">
+  <ng-container *ngIf="!isLoading; else loading">
+    <i *ngIf="icon" [class]="icon" style="margin-right: 4px"></i>
+    <!--<i *ngIf="predefinedIcon" style="margin-right: 4px;" [class]="getIconClass()"></i>-->
+    {{ text }}
+  </ng-container>
+  <ng-template #loading>
+    <span class="spinner"></span>
+    <!-- Spinner icon -->
+  </ng-template>
+</button>

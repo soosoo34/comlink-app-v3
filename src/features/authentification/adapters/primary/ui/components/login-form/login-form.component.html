@@ -1,27 +1,49 @@
 <div class="container">
   <div class="container-login">
     <div class="background-img">
-      <img alt="logo en1" src="../../../../../../../assets/login/logo.png" />
+      <img
+        alt="logo en1"
+        height="140"
+        ngSrc="../../../../../../../assets/login/logo.png"
+        width="140" />
     </div>
-    <div class="header">Comlink</div>
+    <div class="header">
+      <img
+        alt="Comlink"
+        height="48"
+        ngSrc="assets/login/comlink.png"
+        width="200" />
+      <span style="display: flex; justify-content: center; margin-top: 3rem">
+        <hr />
+      </span>
+    </div>
+
     <div class="form">
       <ng-container [formGroup]="loginForm">
-        <label for="log">Username</label>
-        <input
+        <app-input
           formControlName="log"
-          id="log"
-          placeholder="Username"
-          type="text" />
-        <label for="password">Password</label>
-        <input
+          inputId="log"
+          placeholder="Identifiant"
+          rounded="true"
+          type="text"
+          width="extra-large" />
+        <app-input
           formControlName="password"
-          id="password"
-          placeholder="Password"
-          type="password" />
-
-        <button (click)="onTryLogin()" class="btn btn-primary">Login</button>
+          inputId="password"
+          placeholder="Mot de passe"
+          rounded="true"
+          type="password"
+          width="extra-large" />
       </ng-container>
     </div>
-    <div class="footer"></div>
+    <div class="footer">
+      <hr />
+      <app-btn
+        (click)="onTryLogin()"
+        color="primary"
+        size="large"
+        text="Connexion">
+      </app-btn>
+    </div>
   </div>
 </div>
