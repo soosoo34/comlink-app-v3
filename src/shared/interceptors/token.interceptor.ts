@@ -4,44 +4,36 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-const USER_TOKEN = 'user_token';
-const ALLOWED_URLS = [
-  'https://suggestions.pappers.fr/v2',
-  'https://api.openai.com/',
-];
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  private readonly token: string | null;
-
-  constructor(@Inject('localStorage') private localStorage: Storage) {
-    this.token = this.localStorage.getItem(USER_TOKEN);
-  }
+  constructor() {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (this.isAllowedUrl(req.url)) {
-      req = this.setAuthHeaders(req);
+    // Vérifie si l'URL de la requête contient la chaîne spécifiée
+    if (
+      !req.url.includes('https://suggestions.pappers.fr/v2') &&
+      !req.url.includes('https://api.openai.com/')
+    ) {
+      if (req.headers.has('Authorization')) {
+        req = req.clone({
+          setHeaders: {
+            Authorization: `Bearer fb8ab128d37e2857f6175fa76af8553b00ad1293fe56b1d9`,
+          },
+        });
+      } else if (localStorage.getItem('user_token')) {
+        req = req.clone({
+          setHeaders: {
+            Authorization: `Bearer ${localStorage.getItem('user_token')}`,
+          },
+        });
+      }
     }
     return next.handle(req);
-  }
-
-  private isAllowedUrl(url: string): boolean {
-    return !ALLOWED_URLS.some(allowedUrl => url.includes(allowedUrl));
-  }
-
-  private setAuthHeaders(req: HttpRequest<any>): HttpRequest<any> {
-    return req.clone({
-      setHeaders: {
-        Authorization: req.headers.has('Authorization')
-          ? `Bearer fb8ab128d37e2857f6175fa76af8553b00ad1293fe56b1d9`
-          : `Bearer ${this.token}`,
-      },
-    });
   }
 }
