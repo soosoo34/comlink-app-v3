@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { MandatsApiService } from '@features/mandats/adapters/secondary/real/mandats-api.service';
 import { MandatInterface } from '@features/mandats/domain/entities/mandat.interface';
+import { MandatApiPort } from '@features/mandats/domain/ports/api/mandat-api.port';
 import { LoadSilenceMandats } from '@features/mandats/domain/redux/actions/mandats.action';
 import { Action, State, StateContext } from '@ngxs/store';
 import { lastValueFrom } from 'rxjs';
@@ -21,7 +21,7 @@ export const defaultMandatState: MandatStateModel = {
 })
 @Injectable()
 export class MandatState {
-  constructor(public mandatService: MandatsApiService) {}
+  constructor(public mandatService: MandatApiPort) {}
 
   @Action(LoadSilenceMandats)
   async loadSilenceMandats(ctx: StateContext<MandatStateModel>): Promise<void> {

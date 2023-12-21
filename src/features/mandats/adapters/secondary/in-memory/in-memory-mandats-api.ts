@@ -9,11 +9,11 @@ export class InMemoryMandatsApi implements MandatApiPort {
     this.mandat = [];
   }
 
-  feedMandats(mandat: MandatInterface): void {
+  public feedMandats(mandat: MandatInterface): void {
     this.mandat.push(mandat);
   }
 
-  getMandats(): Observable<MandatInterface[]> {
+  getMandats(): Observable<any> {
     return new Observable(subscriber => {
       subscriber.next(this.mandat);
       subscriber.complete();
