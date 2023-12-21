@@ -14,4 +14,8 @@ export class MandatsApiService {
   getMandats(): Observable<any> {
     return this.http.get(`${this.apiPath}/mandats`);
   }
+
+  getArchivedMandats(): Observable<any> {
+    return this.http.get(`${this.apiPath}/mandats-archives`);
+  }
 }

@@ -24,4 +24,9 @@ export class AuthenticationSelectors {
   static errorMessages(state: AuthenticationStateModel): string | null {
     return state.errorMessage;
   }
+
+  @Selector([AuthenticationState])
+  static userCabinetId(state: AuthenticationStateModel): number | undefined {
+    return state.user?.id_cabinet;
+  }
 }

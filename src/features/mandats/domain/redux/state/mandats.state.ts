@@ -7,13 +7,11 @@ import { lastValueFrom } from 'rxjs';
 
 export class MandatStateModel {
   mandats: MandatInterface[] | undefined;
-  archivedMandats: MandatInterface[] | undefined;
   mandatSelection: number[] | undefined;
 }
 
 export const defaultMandatState: MandatStateModel = {
   mandats: [],
-  archivedMandats: [],
   mandatSelection: [],
 };
 
@@ -27,9 +25,13 @@ export class MandatState {
 
   @Action(LoadSilenceMandats)
   async loadSilenceMandats(ctx: StateContext<MandatStateModel>): Promise<void> {
-    const mandats = await lastValueFrom(this.mandatService.getMandats());
-    ctx.patchState({
-      mandats: mandats,
-    });
+    try {
+      const mandats = await lastValueFrom(this.mandatService.getMandats());
+      ctx.patchState({
+        mandats: mandats,
+      });
+    } catch (error) {
+      console.error('Erreur lors du chargement des mandats', error);
+    }
   }
 }
