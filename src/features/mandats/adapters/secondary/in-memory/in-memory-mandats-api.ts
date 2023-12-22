@@ -19,4 +19,11 @@ export class InMemoryMandatsApi implements MandatApiPort {
       subscriber.complete();
     });
   }
+
+  getArchivedMandats(): Observable<any> {
+    return new Observable(subscriber => {
+      subscriber.next(this.mandat);
+      subscriber.complete();
+    });
+  }
 }

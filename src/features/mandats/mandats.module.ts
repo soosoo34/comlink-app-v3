@@ -11,7 +11,8 @@ import { MandatsRoutingModule } from './mandats-routing.module';
 
 @NgModule({
   imports: [
-    NgxsModule.forFeature([MandatState, ArchivedMandatState]),
+    NgxsModule.forFeature([MandatState]),
+    NgxsModule.forFeature([ArchivedMandatState]),
     CommonModule,
     MandatsRoutingModule,
   ],

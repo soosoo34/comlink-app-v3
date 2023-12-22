@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { InMemoryMandatsApi } from '@features/mandats/adapters/secondary/in-memory/in-memory-mandats-api';
 import { MandatBuilder } from '@features/mandats/domain/entities/mandat.builder';
 import { MandatApiPort } from '@features/mandats/domain/ports/api/mandat-api.port';
-import { LoadSilenceMandats } from '@features/mandats/domain/redux/actions/mandats.action';
-import { MandatState } from '@features/mandats/domain/redux/state/mandats.state';
+import { LoadSilenceArchivedMandats } from '@features/mandats/domain/redux/actions/archived-mandats.actions';
+import { ArchivedMandatState } from '@features/mandats/domain/redux/state/archived-mandats.state';
 import { NgxsModule, Store } from '@ngxs/store';
 import { firstValueFrom } from 'rxjs';
 
@@ -15,7 +15,7 @@ describe('Mandats Action', () => {
   beforeEach(() => {
     mandatsApi = new InMemoryMandatsApi();
     TestBed.configureTestingModule({
-      imports: [NgxsModule.forRoot([MandatState])],
+      imports: [NgxsModule.forRoot([ArchivedMandatState])],
       providers: [
         {
           provide: MandatApiPort,
@@ -26,13 +26,12 @@ describe('Mandats Action', () => {
     store = TestBed.inject(Store);
   });
 
-  it('should load mandats', async () => {
+  it('should load archived mandats', async () => {
     const mandat = mandatBuilder.build();
     mandatsApi.feedMandats(mandat);
-    await firstValueFrom(store.dispatch(new LoadSilenceMandats()));
-    expect(store.selectSnapshot(state => state.mandats)).toEqual({
-      mandats: [mandat],
-      mandatSelection: [],
+    await firstValueFrom(store.dispatch(new LoadSilenceArchivedMandats()));
+    expect(store.selectSnapshot(state => state.archivedMandats)).toEqual({
+      archivedMandats: [mandat],
     });
   });
 });

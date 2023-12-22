@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationSelectors } from '@features/authentification/domain/redux/selectors/authentication.selectors';
-import { MandatsApiService } from '@features/mandats/adapters/secondary/real/mandats-api.service';
 import { MandatInterface } from '@features/mandats/domain/entities/mandat.interface';
+import { MandatApiPort } from '@features/mandats/domain/ports/api/mandat-api.port';
 import { LoadSilenceArchivedMandats } from '@features/mandats/domain/redux/actions/archived-mandats.actions';
-
-import { Action, State, StateContext, Store } from '@ngxs/store';
+import { Action, State, StateContext } from '@ngxs/store';
 import { lastValueFrom } from 'rxjs';
 
 export class ArchivedMandatStateModel {
@@ -16,22 +14,12 @@ export const defaultArchivedMandatState: ArchivedMandatStateModel = {
 };
 
 @State<ArchivedMandatStateModel>({
-  name: 'mandatsArchived',
+  name: 'archivedMandats',
   defaults: defaultArchivedMandatState,
 })
 @Injectable()
 export class ArchivedMandatState {
-  idCabinet: number | undefined;
-
-  constructor(
-    public mandatService: MandatsApiService,
-    public store: Store
-  ) {
-    // import select from auth
-    this.store.select(AuthenticationSelectors.userCabinetId).subscribe(id => {
-      this.idCabinet = id;
-    });
-  }
+  constructor(public mandatService: MandatApiPort) {}
 
   @Action(LoadSilenceArchivedMandats)
   async loadSilenceArchivedMandats(
