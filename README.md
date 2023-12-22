@@ -18,8 +18,8 @@ Via l'action de connexion, nous transférons alors les données dans le store.
 
 ```
 Deux appels API sont effectués : le premier concerne les mandats actifs, et le second, les mandats archivés.
- Nous excluons les mandats en prospection dans l'action des mandats et dispatchons une action pour envoyer uniquement les mandats en prospection 
- dans le store des mandats de prospection. Cela permet d'éviter un double appel lors de l'ouverture de l'application.
+Nous excluons les mandats en prospection dans l'action des mandats et dispatchons une action pour envoyer uniquement les mandats en prospection 
+dans le store des mandats de prospection. Cela permet d'éviter un double appel lors de l'ouverture de l'application.
 
 ```
 
