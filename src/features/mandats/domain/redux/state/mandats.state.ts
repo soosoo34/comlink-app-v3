@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { MandatInterface } from '@features/mandats/domain/entities/mandat.interface';
+import {
+  MandatInterface,
+  MandatStateEnum,
+} from '@features/mandats/domain/entities/mandat.interface';
 import { MandatApiPort } from '@features/mandats/domain/ports/api/mandat-api.port';
 import { LoadSilenceMandats } from '@features/mandats/domain/redux/actions/mandats.action';
 import { Action, State, StateContext } from '@ngxs/store';
@@ -27,8 +30,11 @@ export class MandatState {
   async loadSilenceMandats(ctx: StateContext<MandatStateModel>): Promise<void> {
     try {
       const mandats = await lastValueFrom(this.mandatService.getMandats());
+      const mandatsFiltered = mandats.filter(
+        mandat => mandat.etat !== MandatStateEnum.prospection
+      );
       ctx.patchState({
-        mandats: mandats,
+        mandats: mandatsFiltered,
       });
     } catch (error) {
       console.error('Erreur lors du chargement des mandats', error);

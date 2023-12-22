@@ -28,7 +28,7 @@ describe('Mandats Action', () => {
 
   it('should load archived mandats', async () => {
     const mandat = mandatBuilder.build();
-    mandatsApi.feedMandats(mandat);
+    mandatsApi.feedMandats([mandat]);
     await firstValueFrom(store.dispatch(new LoadSilenceArchivedMandats()));
     expect(store.selectSnapshot(state => state.archivedMandats)).toEqual({
       archivedMandats: [mandat],

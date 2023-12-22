@@ -318,6 +318,6 @@ export class MandatBuilder {
   }
 
   public build(): MandatInterface {
-    return this._mandat;
+    return { ...this._mandat };
   }
 }

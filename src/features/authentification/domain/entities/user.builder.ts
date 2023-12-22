@@ -118,6 +118,6 @@ export class UserBuilder {
   }
 
   build(): User {
-    return this._user;
+    return { ...this._user };
   }
 }
