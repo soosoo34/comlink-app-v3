@@ -1,0 +1,24 @@
+<div [@openClose]="animationState" class="menu">
+  @if (!currentLevel) {
+    <ul>
+      @for (level of levels; track level.id) {
+        <li tabindex="0" (click)="openLevel(level)">
+          {{ level.name }}
+        </li>
+      }
+    </ul>
+  }
+</div>
+
+@if (currentLevel) {
+  <div [@slideInOut]="animationSubLevelState" class="menu-sub-level">
+    <button (click)="closeSubLevel(currentLevel)">Retour</button>
+    <ul>
+      @for (subLevel of currentLevel.subLevels; track subLevel.id) {
+        <li>{{ subLevel.name }}</li>
+      }
+    </ul>
+  </div>
+}
+
+<button (click)="toggleMenu()">Toggle Menu</button>

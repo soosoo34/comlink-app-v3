@@ -1,0 +1,17 @@
+.menu, {
+  position: absolute;
+  z-index: 100; /* Assurez-vous que cela surpasse les autres éléments de la page */
+  width: 300px; /* Largeur du menu */
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5); /* Ombre pour un effet 3D */
+  background: grey;
+}
+
+.menu {
+  left: -300px; /* Position de départ en dehors de l'écran */
+  /* autres styles selon vos besoins */
+}
+
+
+.menu-sub-level {
+  background: red;
+}

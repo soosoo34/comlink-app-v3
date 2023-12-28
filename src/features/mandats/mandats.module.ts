@@ -4,6 +4,7 @@ import { MandatsApiService } from '@features/mandats/adapters/secondary/real/man
 import { MandatApiPort } from '@features/mandats/domain/ports/api/mandat-api.port';
 import { ArchivedMandatState } from '@features/mandats/domain/redux/state/archived-mandats.state';
 import { MandatState } from '@features/mandats/domain/redux/state/mandats.state';
+import { ProspectionMandatsState } from '@features/mandats/domain/redux/state/prospection-mandats.state';
 import { NgxsModule } from '@ngxs/store';
 import { MandatsContainerComponent } from 'src/features/mandats/adapters/primary/ui/containers/mandats.container/mandats-container.component';
 
@@ -13,6 +14,7 @@ import { MandatsRoutingModule } from './mandats-routing.module';
   imports: [
     NgxsModule.forFeature([MandatState]),
     NgxsModule.forFeature([ArchivedMandatState]),
+    NgxsModule.forFeature([ProspectionMandatsState]),
     CommonModule,
     MandatsRoutingModule,
   ],

@@ -5,7 +5,8 @@ import {
 } from '@features/mandats/domain/entities/mandat.interface';
 import { MandatApiPort } from '@features/mandats/domain/ports/api/mandat-api.port';
 import { LoadSilenceMandats } from '@features/mandats/domain/redux/actions/mandats.action';
-import { Action, State, StateContext } from '@ngxs/store';
+import { AddProspectionMandatsWithoutApiCall } from '@features/mandats/domain/redux/actions/prospection-mandats.actions';
+import { Action, State, StateContext, Store } from '@ngxs/store';
 import { lastValueFrom } from 'rxjs';
 
 export class MandatStateModel {
@@ -24,7 +25,10 @@ export const defaultMandatState: MandatStateModel = {
 })
 @Injectable()
 export class MandatState {
-  constructor(public mandatService: MandatApiPort) {}
+  constructor(
+    public mandatService: MandatApiPort,
+    private store: Store
+  ) {}
 
   @Action(LoadSilenceMandats)
   async loadSilenceMandats(ctx: StateContext<MandatStateModel>): Promise<void> {
@@ -33,9 +37,16 @@ export class MandatState {
       const mandatsFiltered = mandats.filter(
         mandat => mandat.etat !== MandatStateEnum.prospection
       );
+      const prospectMandats = mandats.filter(
+        mandat => mandat.etat === MandatStateEnum.prospection
+      );
       ctx.patchState({
         mandats: mandatsFiltered,
       });
+
+      this.store.dispatch(
+        new AddProspectionMandatsWithoutApiCall(prospectMandats)
+      );
     } catch (error) {
       console.error('Erreur lors du chargement des mandats', error);
     }
