@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,30 @@ import { Store } from '@ngxs/store';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  title = 'test';
+  showNavbar = false;
 
-  constructor(private store: Store) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        map(() => this.activatedRoute.root)
+      )
+      .subscribe(route => {
+        let currentRoute = route;
+        while (currentRoute.firstChild) {
+          currentRoute = currentRoute.firstChild;
+        }
+
+        if (currentRoute.snapshot.data['hideNavbar']) {
+          this.showNavbar = false;
+        } else {
+          this.showNavbar = true;
+        }
+      });
+  }
 }

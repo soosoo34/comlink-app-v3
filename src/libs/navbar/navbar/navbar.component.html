@@ -1,19 +1,18 @@
 <div [@openClose]="animationState" class="menu">
-  @if (!currentLevel) {
-    <ul>
-      @for (level of levels; track level.id) {
-        <li tabindex="0" (click)="openLevel(level)">
-          {{ level.name }}
-        </li>
-      }
-    </ul>
-  }
+  <ul>
+    <li (click)="toggleMenu()">Fermer</li>
+    @for (level of levels; track level.id) {
+      <li tabindex="0" (click)="openLevel(level)">
+        {{ level.name }}
+      </li>
+    }
+  </ul>
 </div>
 
 @if (currentLevel) {
   <div [@slideInOut]="animationSubLevelState" class="menu-sub-level">
-    <button (click)="closeSubLevel(currentLevel)">Retour</button>
     <ul>
+      <li (click)="closeSubLevel(currentLevel)">Revenir en arriére</li>
       @for (subLevel of currentLevel.subLevels; track subLevel.id) {
         <li>{{ subLevel.name }}</li>
       }
@@ -21,4 +20,9 @@
   </div>
 }
 
-<button (click)="toggleMenu()">Toggle Menu</button>
+<img
+  (click)="toggleMenu()"
+  alt="open menu"
+  height="40"
+  ngSrc="assets/icons/menu.png"
+  width="40" />

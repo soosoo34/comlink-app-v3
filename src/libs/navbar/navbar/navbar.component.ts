@@ -39,10 +39,10 @@ interface NavLevel {
       state('in', style({ transform: 'translateX(0)' })),
       transition('void => *', [
         style({ transform: 'translateX(-100%)' }),
-        animate(100),
+        animate('0.5s'),
       ]),
       transition('* => void', [
-        animate(100, style({ transform: 'translateX(-100%)' })),
+        animate('0.5s', style({ transform: 'translateX(-100%)' })),
       ]),
     ]),
   ],
@@ -91,23 +91,22 @@ export class NavbarComponent {
 
   toggleMenu() {
     this.animationState = this.animationState === 'open' ? 'closed' : 'open';
-    console.log(this.animationState);
   }
 
   openLevel(level: NavLevel) {
     this.currentLevel = level;
     this.animationSubLevelState = 'open';
-    console.log(this.animationSubLevelState);
   }
 
   closeSubLevel(level: NavLevel) {
+    // Fermer les sous-menus
     if (level.subLevels) {
       level.isOpen = false;
       for (const subLevel of level.subLevels) {
         subLevel.isOpen = false;
       }
-      this.animationSubLevelState = 'closed'; // Ferme les sous-menus
-      console.log(this.animationSubLevelState);
     }
+    this.animationSubLevelState = 'closed';
+    this.currentLevel = undefined;
   }
 }
