@@ -97,6 +97,7 @@ import {
   SalePointCharge,
   SalePointInterface,
 } from '@features/sale-points/domain/entities/sale-point.interface';
+import { DateTimeInterface } from '@src/shared/interaces/date-time.interface.ts/date-time.interface';
 
 export class SalePointBuilder {
   private readonly _salePoint: SalePointInterface;
@@ -620,17 +621,17 @@ export class SalePointBuilder {
     return this;
   }
 
-  public withCreatedAt(created_at: Date): SalePointBuilder {
+  public withCreatedAt(created_at: DateTimeInterface): SalePointBuilder {
     this._salePoint.created_at = created_at;
     return this;
   }
 
-  public withUpdatedAt(updated_at: Date): SalePointBuilder {
+  public withUpdatedAt(updated_at: DateTimeInterface): SalePointBuilder {
     this._salePoint.updated_at = updated_at;
     return this;
   }
 
-  public withDeletedAt(deleted_at: Date): SalePointBuilder {
+  public withDeletedAt(deleted_at: DateTimeInterface): SalePointBuilder {
     this._salePoint.deleted_at = deleted_at;
     return this;
   }
