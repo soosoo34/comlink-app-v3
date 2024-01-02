@@ -17,6 +17,15 @@ const routes: Routes = [
         m => m.DashboardModule
       ),
   },
+
+  {
+    path: 'point-de-vente',
+    loadChildren: () =>
+      import('src/features/sale-points/sale-points.module').then(
+        m => m.SalePointsModule
+      ),
+  },
+
   {
     path: '',
     redirectTo: 'login',
