@@ -3,7 +3,7 @@ import { InMemoryMandatsApi } from '@features/mandats/adapters/secondary/in-memo
 import { MandatBuilder } from '@features/mandats/domain/entities/mandat.builder';
 import { MandatStateEnum } from '@features/mandats/domain/entities/mandat.interface';
 import { MandatApiPort } from '@features/mandats/domain/ports/api/mandat-api.port';
-import { LoadSilenceMandats } from '@features/mandats/domain/redux/actions/mandats.action';
+import { LoadSilenceMandats } from '@features/mandats/domain/redux/actions/mandats.actions';
 import { MandatState } from '@features/mandats/domain/redux/state/mandats.state';
 import { NgxsModule, Store } from '@ngxs/store';
 import { firstValueFrom, lastValueFrom } from 'rxjs';

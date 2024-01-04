@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LoadSilenceArchivedMandats } from '@features/mandats/domain/redux/actions/archived-mandats.actions';
-import { LoadSilenceMandats } from '@features/mandats/domain/redux/actions/mandats.action';
+import { LoadSilenceMandats } from '@features/mandats/domain/redux/actions/mandats.actions';
 import { LoadSilenceSalePoints } from '@features/sale-points/domain/redux/actions/sale-points.action';
 import { Store } from '@ngxs/store';
 

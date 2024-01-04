@@ -4,7 +4,7 @@ import {
   MandatStateEnum,
 } from '@features/mandats/domain/entities/mandat.interface';
 import { MandatApiPort } from '@features/mandats/domain/ports/api/mandat-api.port';
-import { LoadSilenceMandats } from '@features/mandats/domain/redux/actions/mandats.action';
+import { LoadSilenceMandats } from '@features/mandats/domain/redux/actions/mandats.actions';
 import { AddProspectionMandatsWithoutApiCall } from '@features/mandats/domain/redux/actions/prospection-mandats.actions';
 import { Action, State, StateContext, Store } from '@ngxs/store';
 import { lastValueFrom } from 'rxjs';
