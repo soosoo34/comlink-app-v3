@@ -1,4 +1,5 @@
-import {BuyerInterface} from '@features/buyers/domain/entities/buyers.interface';
+import { BuyerInterface } from '@features/buyers/domain/entities/buyers.interface';
+import { DateTimeInterface } from '@src/shared/interaces/date-time.interface.ts/date-time.interface';
 
 export class BuyersBuilder {
   private readonly _buyer: BuyerInterface;
@@ -15,7 +16,11 @@ export class BuyersBuilder {
       action_en_cours: 'action_en_cours',
       date_derniere_action: new Date(),
       mail_frequency: 1,
-      last_sent_mail: new Date(),
+      last_sent_mail: {
+        date: new Date(),
+        timezone_type: 1,
+        timezone: 'timezone',
+      },
       apport: 1,
       origin: 'origin',
       surface_min: 1,
@@ -51,127 +56,127 @@ export class BuyersBuilder {
     };
   }
 
-  withId(id: number): BuyersBuilder {
+  withId(id: number): this {
     this._buyer.id = id;
     return this;
   }
 
-  withIdCabinet(idCabinet: number): BuyersBuilder {
+  withIdCabinet(idCabinet: number): this {
     this._buyer.id_cabinet = idCabinet;
     return this;
   }
 
-  withIdContact(idContact: number): BuyersBuilder {
+  withIdContact(idContact: number): this {
     this._buyer.id_contact = idContact;
     return this;
   }
 
-  withIdConsultant(idConsultant: number): BuyersBuilder {
+  withIdConsultant(idConsultant: number): this {
     this._buyer.id_consultant = idConsultant;
     return this;
   }
 
-  withIdActivite(idActivite: number): BuyersBuilder {
+  withIdActivite(idActivite: number): this {
     this._buyer.id_activite = idActivite;
     return this;
   }
 
-  withEnseigne(enseigne: string): BuyersBuilder {
+  withEnseigne(enseigne: string): this {
     this._buyer.enseigne = enseigne;
     return this;
   }
 
-  withEtat(etat: string): BuyersBuilder {
+  withEtat(etat: string): this {
     this._buyer.etat = etat;
     return this;
   }
 
-  withActionEnCours(actionEnCours: string): BuyersBuilder {
+  withActionEnCours(actionEnCours: string): this {
     this._buyer.action_en_cours = actionEnCours;
     return this;
   }
 
-  withDateDerniereAction(dateDerniereAction: Date): BuyersBuilder {
+  withDateDerniereAction(dateDerniereAction: Date): this {
     this._buyer.date_derniere_action = dateDerniereAction;
     return this;
   }
 
-  withMailFrequency(mailFrequency: number): BuyersBuilder {
+  withMailFrequency(mailFrequency: number): this {
     this._buyer.mail_frequency = mailFrequency;
     return this;
   }
 
-  withLastSentMail(lastSentMail: Date): BuyersBuilder {
+  withLastSentMail(lastSentMail: DateTimeInterface): this {
     this._buyer.last_sent_mail = lastSentMail;
     return this;
   }
 
-  withApport(apport: number): BuyersBuilder {
+  withApport(apport: number): this {
     this._buyer.apport = apport;
     return this;
   }
 
-  withOrigin(origin: string): BuyersBuilder {
+  withOrigin(origin: string): this {
     this._buyer.origin = origin;
     return this;
   }
 
-  withSurfaceMin(surfaceMin: number): BuyersBuilder {
+  withSurfaceMin(surfaceMin: number): this {
     this._buyer.surface_min = surfaceMin;
     return this;
   }
 
-  withSurfaceMax(surfaceMax: number): BuyersBuilder {
+  withSurfaceMax(surfaceMax: number): this {
     this._buyer.surface_max = surfaceMax;
     return this;
   }
 
-  withPremierContact(premierContact: string): BuyersBuilder {
+  withPremierContact(premierContact: string): this {
     this._buyer.premier_contact = premierContact;
     return this;
   }
 
-  withCommentairesConsultant(commentairesConsultant: string): BuyersBuilder {
+  withCommentairesConsultant(commentairesConsultant: string): this {
     this._buyer.commentaires_consultant = commentairesConsultant;
     return this;
   }
 
-  withSecteur(secteur: string): BuyersBuilder {
+  withSecteur(secteur: string): this {
     this._buyer.secteur = secteur;
     return this;
   }
 
-  withExperiencePro(experiencePro: string): BuyersBuilder {
+  withExperiencePro(experiencePro: string): this {
     this._buyer.experience_pro = experiencePro;
     return this;
   }
 
-  withAssocie(associe: string): BuyersBuilder {
+  withAssocie(associe: string): this {
     this._buyer.associe = associe;
     return this;
   }
 
-  withCommentairesArchive(commentairesArchive: string): BuyersBuilder {
+  withCommentairesArchive(commentairesArchive: string): this {
     this._buyer.commentaires_archive = commentairesArchive;
     return this;
   }
 
-  withDateArchive(dateArchive: any): BuyersBuilder {
+  withDateArchive(dateArchive: DateTimeInterface): this {
     this._buyer.date_archive = dateArchive;
     return this;
   }
 
-  withCreatedAt(createdAt: any): BuyersBuilder {
+  withCreatedAt(createdAt: DateTimeInterface): this {
     this._buyer.created_at = createdAt;
     return this;
   }
 
-  withUpdatedAt(updatedAt: any): BuyersBuilder {
+  withUpdatedAt(updatedAt: DateTimeInterface): this {
     this._buyer.updated_at = updatedAt;
     return this;
   }
 
-  withDeletedAt(deletedAt: any): BuyersBuilder {
+  withDeletedAt(deletedAt: DateTimeInterface): this {
     this._buyer.deleted_at = deletedAt;
     return this;
   }
@@ -179,6 +184,4 @@ export class BuyersBuilder {
   public build(): BuyerInterface {
     return this._buyer;
   }
-
 }
-
