@@ -4,6 +4,7 @@ import { BuyerInterface } from '@features/buyers/domain/entities/buyers.interfac
 import { BuyerApiPort } from '@features/buyers/domain/ports/buyer-api.port';
 import { environment } from '@src/environments/environment';
 import { EMPTY, expand, Observable, reduce } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,20 @@ export class BuyersApiService implements BuyerApiPort {
       reduce(
         (acc: BuyerInterface[], buyers: BuyerInterface[]) => acc.concat(buyers),
         [] as BuyerInterface[]
-      )
+      ),
+      map(buyers => {
+        const uniqueBuyersSet = new Set();
+        const uniqueBuyers = [];
+        for (const buyer of buyers) {
+          const buyerStr = JSON.stringify(buyer);
+          if (!uniqueBuyersSet.has(buyerStr)) {
+            uniqueBuyersSet.add(buyerStr);
+            uniqueBuyers.push(buyer);
+          }
+        }
+
+        return uniqueBuyers;
+      })
     );
   }
 
